@@ -1,7 +1,8 @@
-import express from 'express';
+import express, { NextFunction, Request, Response } from 'express';
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
 import { signupRouter } from './user/routes/signup';
+import { NotFoundError } from './shared/errors';
 import { errorHandler } from './shared/middlewares/error-handler';
 
 const app = express();
@@ -15,6 +16,14 @@ app.use(
 );
 
 app.use(signupRouter);
+
+app.all('*', async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        throw new NotFoundError();
+    } catch (error) {
+        next(error);
+    }
+});
 
 app.use(errorHandler);
 
