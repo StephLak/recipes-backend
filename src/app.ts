@@ -4,6 +4,7 @@ import cookieSession from 'cookie-session';
 import { signupRouter } from './user/routes/signup';
 import { NotFoundError } from './shared/errors';
 import { errorHandler } from './shared/middlewares/error-handler';
+import { signinRouter } from './user/routes/signin';
 
 const app = express();
 app.set('trust proxy', true);
@@ -15,6 +16,7 @@ app.use(
     })
 );
 
+app.use(signinRouter);
 app.use(signupRouter);
 
 app.all('*', async (req: Request, res: Response, next: NextFunction) => {
