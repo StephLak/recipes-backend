@@ -18,4 +18,4 @@ app.use(signupRouter);
 
 app.use(errorHandler);
 
-export { app };
+export default app;

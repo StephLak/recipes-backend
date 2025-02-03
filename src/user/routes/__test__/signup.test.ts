@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { app } from '../../../app';
+import app from '../../../app';
 
 it('restituisce un 201 in caso di registrazione riuscita', async () => {
     request(app)
