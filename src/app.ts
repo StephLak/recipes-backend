@@ -7,6 +7,9 @@ import { errorHandler } from './shared/middlewares/error-handler';
 import { signinRouter } from './user/routes/signin';
 import { createRecipeRouter } from './recipes/routes/create';
 import { signoutRouter } from './user/routes/signout';
+import { deleteRecipeRouter } from './recipes/routes/delete';
+import { indexRecipeRouter } from './recipes/routes';
+import { myRecipesRouter } from './recipes/routes/my-recipes';
 
 const app = express();
 app.set('trust proxy', true);
@@ -25,7 +28,10 @@ app.use(signoutRouter);
 app.use(signupRouter);
 
 // Recipe routes
+app.use(deleteRecipeRouter);
 app.use(createRecipeRouter);
+app.use(indexRecipeRouter);
+app.use(myRecipesRouter);
 
 // Not found routes
 app.all('*', async (req: Request, res: Response, next: NextFunction) => {

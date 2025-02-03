@@ -49,7 +49,7 @@ it('creates a ticket with valid inputs', async () => {
 
   await request(app)
     .post('/api/recipes')
-    .set('Cookie',await global.signin())
+    .set('Cookie', await global.signin())
     .send({
       title,
       description: 'description',
