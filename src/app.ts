@@ -5,6 +5,8 @@ import { signupRouter } from './user/routes/signup';
 import { NotFoundError } from './shared/errors';
 import { errorHandler } from './shared/middlewares/error-handler';
 import { signinRouter } from './user/routes/signin';
+import { createRecipeRouter } from './recipes/routes/create';
+import { signoutRouter } from './user/routes/signout';
 
 const app = express();
 app.set('trust proxy', true);
@@ -12,13 +14,20 @@ app.use(json());
 app.use(
     cookieSession({
         signed: false,
-        secure: process.env.NODE_ENV !== 'test',
+        secure: false,
+        // secure: process.env.NODE_ENV !== 'test',
     })
 );
 
+// Auth routes
 app.use(signinRouter);
+app.use(signoutRouter);
 app.use(signupRouter);
 
+// Recipe routes
+app.use(createRecipeRouter);
+
+// Not found routes
 app.all('*', async (req: Request, res: Response, next: NextFunction) => {
     try {
         throw new NotFoundError();
