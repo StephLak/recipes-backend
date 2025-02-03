@@ -2,7 +2,7 @@ import request from 'supertest';
 import app from '../../../app';
 
 it('restituisce un 201 in caso di registrazione riuscita', async () => {
-    request(app)
+    await request(app)
         .post('/api/users/signup')
         .send({
             email: 'test2@test.com',
@@ -12,23 +12,23 @@ it('restituisce un 201 in caso di registrazione riuscita', async () => {
 }, 3000);
 
 it("restituisce un 400 con un'e-mail non valida", async () => {
-    request(app)
-    .post('/api/users/signup')
-    .send({
-        email: 'testest.com',
-        password: 'password'
-    })
-    .expect(400);
+    await request(app)
+        .post('/api/users/signup')
+        .send({
+            email: 'testest.com',
+            password: 'password'
+        })
+        .expect(400);
 });
 
 it('restituisce un 400 con una password non valida', async () => {
-    request(app)
-    .post('/api/users/signup')
-    .send({
-        email: 'test@test.com',
-        password: 'p'
-    })
-    .expect(400);
+    await request(app)
+        .post('/api/users/signup')
+        .send({
+            email: 'test@test.com',
+            password: 'p'
+        })
+        .expect(400);
 });
 
 it('restituisce un 400 con email o password mancanti', async () => {
