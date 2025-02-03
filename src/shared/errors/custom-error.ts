@@ -1,4 +1,4 @@
-abstract class CustomError extends Error {
+export abstract class CustomError extends Error {
     abstract statusCode: number;
 
     constructor() {
@@ -11,5 +11,3 @@ abstract class CustomError extends Error {
         field?: string;
     }[];
 }
-
-export { CustomError };
