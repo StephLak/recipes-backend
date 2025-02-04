@@ -10,6 +10,7 @@ import { signoutRouter } from './user/routes/signout';
 import { deleteRecipeRouter } from './recipes/routes/delete';
 import { indexRecipeRouter } from './recipes/routes';
 import { myRecipesRouter } from './recipes/routes/my-recipes';
+import { currentUserRouter } from './user/routes/current-user';
 
 const app = express();
 app.set('trust proxy', true);
@@ -23,6 +24,7 @@ app.use(
 );
 
 // Auth routes
+app.use(currentUserRouter);
 app.use(signinRouter);
 app.use(signoutRouter);
 app.use(signupRouter);
